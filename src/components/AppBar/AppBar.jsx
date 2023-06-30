@@ -15,7 +15,6 @@ const AppBar = () => {
     textDecoration: 'none',
   };
 
-  console.log('isLoggedIn: ' + isLoggedIn);
   return (
     <header>
       <Box sx={{ flexGrow: 1 }}>
