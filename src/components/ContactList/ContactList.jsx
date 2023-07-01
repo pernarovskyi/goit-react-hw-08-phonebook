@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import {
   fetchContacts,
   deleteContact,
-  updateContact
+  updateContact,
 } from 'redux/contacts/contactsOperations';
 import {
   selectFilteredContacts,
@@ -27,7 +27,7 @@ export const ContactList = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [contactId, setContactId] = useState(null);
   const [contactName, setContactName] = useState(null);
-  const [contactNumber, setContactNumber] = useState(null); 
+  const [contactNumber, setContactNumber] = useState(null);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -38,7 +38,7 @@ export const ContactList = () => {
   };
 
   const handleUpdate = (id, name, number) => {
-    dispatch(updateContact({id, name, number}));
+    dispatch(updateContact({ id, name, number }));
   };
 
   const handleModalDeleteClose = () => {
@@ -56,11 +56,12 @@ export const ContactList = () => {
 
   const contactListNotificationStyle = {
     textAlign: 'center',
-  };  
+  };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
-      {isLoading && <Loader />}
       {!isLoading &&
         filteredContacts.length === 0 &&
         !appliedFilter &&
@@ -79,7 +80,7 @@ export const ContactList = () => {
               style={{ fontSize: '10px' }}
               variant="text"
               type="submit"
-              onClick={() => {                              
+              onClick={() => {
                 setContactId(id);
                 setContactName(name);
                 setContactNumber(number);
@@ -104,19 +105,19 @@ export const ContactList = () => {
 
         {isDeleteOpen && (
           <ModalDelete
-            isDeleteOpen={handleModalDeleteClose}            
+            isDeleteOpen={handleModalDeleteClose}
             onDelete={handleDelete}
             contactId={contactId}
           />
         )}
 
         {isEditOpen && (
-          <ModalEdit 
-          isEditOpen={handleModalEditClose}
-          contactData = {{contactId, contactName, contactNumber}}
-          setContactName = {setContactName}
-          setContactNumber = {setContactNumber}
-          onUpdate = {handleUpdate}
+          <ModalEdit
+            isEditOpen={handleModalEditClose}
+            contactData={{ contactId, contactName, contactNumber }}
+            setContactName={setContactName}
+            setContactNumber={setContactNumber}
+            onUpdate={handleUpdate}
           />
         )}
       </List>

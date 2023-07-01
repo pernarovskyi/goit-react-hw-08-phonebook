@@ -28,19 +28,19 @@ const App = () => {
           <Route
             path="/register"
             element={
-              <RestrictedRoute component={Register} redirectTo="/contacts" />
+              <RestrictedRoute component={<Register />} redirectTo="/login" />
             }
           />
           <Route
             path="/login"
             element={
-              <RestrictedRoute component={LogIn} redirectTo="/contacts" />
+              <RestrictedRoute component={<LogIn />} redirectTo="/contacts" />
             }
           />
           <Route
             path="/contacts"
             element={
-              <PrivateRoute component={Contacts} redirectTo="/login" />
+              <PrivateRoute component={<Contacts />} redirectTo="/login" />
             }
           />
           <Route path="*" element={<Navigate to="/" />} /> {/*NotFoundPage*/}
